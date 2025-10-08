@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'Hafs';
+    src: url('./Hafs.otf') format('opentype');
+}
+#quran{
+    /* align-self: right; */
+    max-width: 100%;
+    align-content: center;
+    margin-top: 10px;
+    font-size:170%;
+    /* border: 5px solid rgb(137, 186, 182); */
+    max-height: 100%;
+    user-select: none;
+}
+body {
+    font-family:  'Hafs', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 100%;
+}
+
+
+.sura-title {
+    font-size: 1em;
+    font-weight: bold;
+    color: #2a7a9c;
+    /* border: inset black 1px;
+    border-radius: 30px; */
+    padding: 5px 0px;
+    display: inline-block;
+    transform: none;
+    -webkit-transform:scale(2,1);
+    /* margin: 0 0 auto auto; */
+}
+.sura-header::before{
+    color: #f9f9f9;
+    padding-right: 20px;
+    content: "﴾";
+    font-size: 30px;
+}
+.sura-header::after{
+    padding-left: 20px;
+    color: #f9f9f9;
+    content: "﴿";
+    font-size: 30px;
+}
+.ayaat{
+    padding: 10px 0px;
+}
+.bis{
+    /* width: fit-content; */
+    text-align: center;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px 0px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-bottom: 5px;
+    color: white;
+}
+.bis:hover{
+    color: rgb(0, 187, 255);
+}
+.aya {
+    font-family: 'Hafs';
+    transition-property: background-color;
+    transition-duration: .5s;
+    margin: 6px;
+    line-height: 2;
+    border-radius: 7px 7px 7px 7px;
+    padding: 0 5px;
+    width: calc(90%);
+    margin: 5px 0;
+}
+.aya:hover{
+    background-color: rgb(137, 186, 182);
+}
+/* @keyframes hovered {
+    from{
+        background-color: #fff;
+    }
+    to{
+        background-color: black;
+    }
+} */
+ .sura-header{
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+ }
+.sura{
+    text-align: center;
+    max-width: fit-content;
+}

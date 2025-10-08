@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Display</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+<body class="bg-dark text-center">
+    <!-- <center> -->
+
+        <div id="quran" class="container">
+            <!-- Quran content will be rendered here -->
+        </div>
+    <!-- </center> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("quran-simple.xml").then(response => {
+                return response.text();
+            }).then(xmlString => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                const suras = xmlDoc.getElementsByTagName("sura");
+                const container = document.getElementById("quran");
+
+                let count = 1;
+                const c = "count-";
+
+                // for (const sura of suras) {
+                sura = suras[2];
+                const suraDiv = document.createElement("div");
+                suraDiv.classList.add("sura");
+                suraDiv.classList.add("container");
+
+                const Titleheader = document.createElement("div");
+                Titleheader.classList.add("sura-header");
+                // const prevDiv = document.createElement("div");
+                // let prev_img = document.createElement("img");
+                // prev_img.src = "https://w7.pngwing.com/pngs/16/386/png-transparent-computer-icons-arrow-down-font-awesome-html-css-angle-rectangle-triangle.png";
+                // prev_img.alt = "Dynamic Image";
+                // prevDiv.appendChild(prev_img);
+                // prevDiv.classList.add('prev');
+                // const nextDiv = document.createElement("div");
+                // let next_img = document.createElement("img");
+                // next_img.src = "https://cdn-icons-png.flaticon.com/128/318/318275.png";
+                // next_img.alt = "Dynamic Image";
+                // nextDiv.appendChild(next_img);
+                // nextDiv.classList.add('next');
+                const titleDiv = document.createElement("div");
+                titleDiv.textContent = sura.getAttribute("name");
+                // prev_img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                // next_img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                // prev_img.style.opacity = 0;
+                // prev_img.style.transform = "translateX(20px)";
+                // next_img.style.transform = "translateX(-20px)";
+                // next_img.style.opacity = 0;
+                // titleDiv.onmouseover = function () {
+                //     prev_img.style.opacity = 1;
+                //     next_img.style.opacity = 1;
+                //     prev_img.style.transform = "translateX(0)";
+                //     next_img.style.transform = "translateX(0)";
+                // }
+                // titleDiv.onmouseout = function () {
+                //     prev_img.style.opacity = 0;
+                //     next_img.style.opacity = 0;
+                //     prev_img.style.transform = "translateX(20px)";
+                //     next_img.style.transform = "translateX(-20px)";
+                // }
+                titleDiv.classList.add('sura-title', 'text-center');
+                // Titleheader.appendChild(prevDiv);
+                Titleheader.appendChild(titleDiv);
+                // Titleheader.appendChild(nextDiv);
+                suraDiv.appendChild(Titleheader);
+                suraDiv.classList.add(c.concat(String(count)));
+                const ayaaat = document.createElement("div");
+                const ayas = sura.getElementsByTagName("aya");
+                for (const aya of ayas) {
+                    const ayaDiv = document.createElement("div");
+                    if (aya.getAttribute("bismillah")) {
+                        const bisdi = document.createElement('div');
+                        bisdi.classList.add('bis');
+                        bisdi.textContent = ` ${aya.getAttribute("bismillah")}`;
+                        suraDiv.appendChild(bisdi)
+                    }
+                    const stop = document.createElement("span");
+                    stop.textContent = ` ${aya.getAttribute("stop")}`;
+                    ayaDiv.classList.add("aya");
+                    ayaDiv.textContent = ` ${aya.getAttribute("text")}`;
+                    ayaDiv.appendChild(stop);
+                    ayaaat.appendChild(ayaDiv);
+                    ayaaat.classList.add("ayaat", "text-white", "d-flex", "flex-column", "align-items-center");
+                }
+                suraDiv.appendChild(ayaaat);
+
+                container.appendChild(suraDiv);
+                count = count + 1;
+                // if (count == 2) {
+                //     break;
+                // }
+                // }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
